@@ -1,0 +1,32 @@
+1)	SELECT `name`
+	FROM `students`
+	WHERE YEAR(`date_of_birth`) = 1990;
+
+2)	SELECT `name`
+	FROM `courses`
+	WHERE `cfu`> 10;
+
+3)	SELECT `name`, year(curdate())-year(`date_of_birth`) - (right(curdate(),5) < right(`date_of_birth`,5)) AS age
+	FROM `students`
+	WHERE (year(curdate())-year(`date_of_birth`) - (right(curdate(),5) < right(`date_of_birth`,5))) > 30;
+
+4)	SELECT `name`
+	FROM `courses`
+	WHERE `period` = "I semestre"
+	AND `year`= 1;
+
+5)	SELECT *
+	FROM `exams`
+	WHERE `date` = "2020-06-20"
+	AND `hour` > "14:00:00";
+
+6)	SELECT `name`
+	FROM `degrees`
+	WHERE `level` = "magistrale";
+
+7)	SELECT COUNT(id)
+	FROM `departments`;
+
+8)	SELECT `name`, `surname` 
+	FROM `teachers`
+	WHERE `phone` IS NULL;
