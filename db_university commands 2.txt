@@ -71,6 +71,8 @@ Join
 	WHERE `departments`.`name` = "Dipartimento di Matematica"
 	GROUP BY `teachers`.`id`;
 
-7)	SELECT `student_id` AS "Studente", `exam_id` AS "Esame",COUNT(*) AS "Tentativi", MAX(vote) AS "Voto migliore", MIN(vote) AS "Voto minore"
-	FROM `exam_student`
-	GROUP BY `student_id`, `exam_id`;
+7)	SELECT `student_id` AS "Studente", `course_id` AS "Esame",COUNT(*) AS "Tentativi", MAX(vote) AS "Voto migliore", MIN(vote) AS "Voto minore"
+	FROM exams
+	JOIN exam_student
+	ON exams.id = exam_student.exam_id
+	GROUP BY student_id, course_id;
