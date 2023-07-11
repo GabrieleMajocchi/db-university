@@ -8,7 +8,7 @@ Group by
 	FROM `teachers`
 	GROUP BY `office_address`;
 
-3)	SELECT `exam_id`,(SUM(`vote`)/ COUNT(`exam_id`)) AS "Media voti"
+3)	SELECT `exam_id`, AVG(`Vote`) AS "Media voti"
 	FROM `exam_student`
 	GROUP BY `exam_id`;
 
