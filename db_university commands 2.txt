@@ -1,0 +1,74 @@
+Group by
+
+1)	SELECT COUNT(`id`), YEAR(`enrolment_date`)
+	FROM `students`
+	GROUP BY YEAR(`enrolment_date`);
+
+2)	SELECT COUNT(`id`), `office_address`
+	FROM `teachers`
+	GROUP BY `office_address`;
+
+3)	SELECT `exam_id`,(SUM(`vote`)/ COUNT(`exam_id`)) AS "Media voti"
+	FROM `exam_student`
+	GROUP BY `exam_id`;
+
+4)	SELECT `department_id` AS "Dipartimento",COUNT(`name`) AS "Quantità di corsi"
+	FROM `degrees`
+	GROUP BY `department_id`;
+
+Join
+
+1)	SELECT `students`.`name`,`students`.`surname`,`students`.`registration_number`,`degrees`.`name`
+	FROM `students`
+	JOIN `degrees`
+	ON `degrees`.`id` = `students`.`degree_id`
+	WHERE `degrees`.`name` = "Corso di Laurea in Economia";
+
+2)	SELECT `degrees`.`name` AS "Corso di Laurea", `departments`.`name` AS "Dipartimento"
+	FROM `departments`
+	JOIN `degrees`
+	ON `degrees`.`department_id` = `departments`.`id`
+	WHERE `departments`.`name` = "Dipartimento di Neuroscienze";
+
+3)	SELECT CONCAT(`teachers`.`name`, " ", `teachers`.`surname`) AS "Prof", `degrees`.`name` AS "Corso"
+	FROM `teachers`
+	JOIN `course_teacher`
+	ON `course_teacher`.`teacher_id` = `teachers`.`id`
+	JOIN `courses`
+	ON `courses`.`id` = `course_teacher`.`course_id`
+	JOIN `degrees`
+	ON `courses`.`degree_id` = `degrees`.`id`
+	WHERE `teachers`.`id` = 44;
+
+4)	SELECT `students`.`surname`, `students`.`name`, `degrees`.`name`, `departments`.`name`
+	FROM `students`
+	JOIN `degrees`
+	ON `students`.`degree_id` = `degrees`.`id`
+	JOIN `departments`
+	ON `degrees`.`department_id` = `departments`.`id`
+	ORDER BY `students`.`surname`, `students`.`name`;
+
+5)	SELECT `degrees`.`name` AS "Corso di Laurea", `courses`.`name` AS "Nome del corso", CONCAT(`teachers`.`name`, " ", `teachers`.`surname`) AS "Professore"
+	FROM `degrees`
+	JOIN `courses`
+	ON `courses`.`degree_id` = `degrees`.`id`
+	JOIN `course_teacher`
+	ON `course_teacher`.`course_id` = `courses`.`id`
+	JOIN `teachers`
+	ON `teachers`.`id` = `course_teacher`.`teacher_id`;
+
+6)	SELECT CONCAT(`teachers`.`name`, " ", `teachers`.`surname`) AS "Professore", `departments`.`name` AS "Insegna nel:"
+	FROM `teachers`
+	JOIN `course_teacher`
+	ON `course_teacher`.`teacher_id` = `teachers`.`id`
+	JOIN `courses`
+	ON `course_teacher`.`course_id` = `courses`.`id`
+	JOIN `degrees`
+	ON `courses`.`degree_id` = `degrees`.`id`
+	JOIN `departments`
+	ON `degrees`.`department_id` = `departments`.`id`
+	WHERE `departments`.`name` = "Dipartimento di Matematica";
+
+7)	SELECT `student_id` AS "Studente", `exam_id` AS "Esame",COUNT(*) AS "Tentativi", MAX(vote) AS "Voto migliore", MIN(vote) AS "Voto minore"
+	FROM `exam_student`
+	GROUP BY `student_id`, `exam_id`;
