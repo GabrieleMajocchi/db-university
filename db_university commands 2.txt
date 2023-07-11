@@ -68,7 +68,8 @@ Join
 	ON `courses`.`degree_id` = `degrees`.`id`
 	JOIN `departments`
 	ON `degrees`.`department_id` = `departments`.`id`
-	WHERE `departments`.`name` = "Dipartimento di Matematica";
+	WHERE `departments`.`name` = "Dipartimento di Matematica"
+	GROUP BY `teachers`.`id`;
 
 7)	SELECT `student_id` AS "Studente", `exam_id` AS "Esame",COUNT(*) AS "Tentativi", MAX(vote) AS "Voto migliore", MIN(vote) AS "Voto minore"
 	FROM `exam_student`
