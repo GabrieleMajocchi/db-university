@@ -28,7 +28,8 @@ Join
 	FROM `departments`
 	JOIN `degrees`
 	ON `degrees`.`department_id` = `departments`.`id`
-	WHERE `departments`.`name` = "Dipartimento di Neuroscienze";
+	WHERE `departments`.`name` = "Dipartimento di Neuroscienze"
+	AND  `degrees`.`name` LIKE  "%Corso di Laurea Magistrale%";
 
 3)	SELECT CONCAT(`teachers`.`name`, " ", `teachers`.`surname`) AS "Prof", `degrees`.`name` AS "Corso"
 	FROM `teachers`
